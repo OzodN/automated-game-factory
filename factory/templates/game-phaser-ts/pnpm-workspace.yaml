@@ -1,0 +1,6 @@
+# FX-16: keep the pnpm content store inside the factory cache for direct pnpm calls (pnpm 11+ ignores
+# npm_config_store_dir and .npmrc store-dir and would otherwise create <drive root>/.pnpm-store).
+# The path is relative to this file and is right at depth 3 below the factory root, where every pnpm run happens:
+# .worktrees/<game>/<task|_integration|_release-x>/, .cache/template-check/<run>/ and factory/templates/<template>/.
+# The factory CLI sets pnpm_config_store_dir, which takes precedence over this setting.
+storeDir: ../../../.cache/pnpm-store

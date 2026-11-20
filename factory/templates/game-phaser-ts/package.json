@@ -1,0 +1,36 @@
+{
+  "name": "__GAME_ID__",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.18.0",
+  "description": "__GAME_TITLE__ — HTML5 game for Playgama (factory template game-phaser-ts)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "node scripts/serve-dist.mjs dist --port 4173",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
+    "validate": "node scripts/validate-build.mjs dist",
+    "validate:release": "node scripts/validate-build.mjs dist --release",
+    "verify": "pnpm run typecheck && pnpm run lint && pnpm run test:unit && pnpm run build && pnpm run validate && pnpm run test:e2e"
+  },
+  "dependencies": {
+    "@factory/pg-kit": "file:vendor/__KIT_FILE__",
+    "@playgama/bridge": "2.4.1",
+    "phaser": "4.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.65.0",
+    "@types/node": "24.19.2",
+    "eslint": "10.14.0",
+    "globals": "17.14.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.2",
+    "vite": "8.3.8",
+    "vitest": "5.1.0"
+  }
+}

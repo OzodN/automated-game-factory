@@ -1,0 +1,17 @@
+{
+  "template": "mini",
+  "distDir": "dist",
+  "commands": {
+    "install": "node -e 0",
+    "typecheck": "node scripts/check.mjs typecheck",
+    "unit": "node scripts/check.mjs unit",
+    "build": "node scripts/build.mjs",
+    "release-check": "node scripts/check.mjs release"
+  },
+  "taskVerify": ["install", "typecheck", "unit", "build"],
+  "regression": ["install", "typecheck", "unit", "build"],
+  "checkpoint": ["install", "typecheck", "unit", "build", "release-check"],
+  "release": ["install", "typecheck", "unit", "build", "release-check"],
+  "alwaysForbidden": [],
+  "urlAllowlist": ["^https?://localhost"]
+}

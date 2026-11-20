@@ -1,0 +1,4 @@
+# FX-16: pnpm 11+ ignores npm_config_store_dir and .npmrc store-dir; without a configured store it creates
+# <drive root>/.pnpm-store. Keep the content store inside the factory cache for direct pnpm calls in the root.
+# (Relative paths are resolved against this file. The factory CLI also sets pnpm_config_store_dir, which wins.)
+storeDir: .cache/pnpm-store

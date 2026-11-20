@@ -1,0 +1,3 @@
+# FX-16: keep the pnpm content store inside the factory cache (<factory root>/.cache/pnpm-store) for direct pnpm
+# calls in packages/pg-kit. pnpm 11+ ignores npm_config_store_dir and .npmrc store-dir; pnpm_config_store_dir wins.
+storeDir: ../../.cache/pnpm-store

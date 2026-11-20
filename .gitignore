@@ -1,0 +1,17 @@
+# Factory runtime state (authoritative state lives on disk, not in git history)
+/.factory/
+/games/
+/.worktrees/
+/archive/
+/.cache/
+node_modules/
+dist/
+*.log
+.DS_Store
+Thumbs.db
+
+# Machine-specific Claude Code settings
+/.claude/settings.local.json
+
+# Agent reports, reviews and packets (per-installation working files)
+/.inbox/

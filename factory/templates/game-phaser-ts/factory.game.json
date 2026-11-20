@@ -1,0 +1,23 @@
+{
+  "template": "game-phaser-ts",
+  "templateVersion": "1.1.2",
+  "distDir": "dist",
+  "commands": {
+    "scaffoldInstall": "pnpm install --prefer-offline",
+    "install": "pnpm install --frozen-lockfile --prefer-offline",
+    "typecheck": "pnpm run typecheck",
+    "lint": "pnpm run lint",
+    "unit": "pnpm run test:unit",
+    "build": "pnpm run build",
+    "release-check": "pnpm run validate",
+    "release-gate": "pnpm run validate:release",
+    "e2e": "pnpm run test:e2e"
+  },
+  "taskVerify": ["install", "typecheck", "lint", "unit", "build", "release-check", "e2e"],
+  "regression": ["install", "typecheck", "lint", "unit", "build", "release-check", "e2e"],
+  "checkpoint": ["install", "typecheck", "lint", "unit", "build", "release-check", "e2e"],
+  "release": ["install", "typecheck", "lint", "unit", "build", "release-gate", "e2e"],
+  "covers": { "query": "?pgtest=1&seed=12345", "settleMs": 800, "steps": [{ "clickAt": [0.5, 0.6] }, { "waitMs": 2500 }] },
+  "alwaysForbidden": ["factory.game.json", ".npmrc", "public/playgama-bridge-config.json"],
+  "urlAllowlist": ["^https?://localhost", "^https://bridge\\.playgama\\.com/"]
+}

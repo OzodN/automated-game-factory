@@ -1,0 +1,14 @@
+{
+  "forciblySetPlatformId": "",
+  "sendAnalyticsEvents": true,
+  "advertisement": {
+    "interstitial": {
+      "preload": true,
+      "placements": [{ "id": "level_end" }, { "id": "game_over" }, { "id": "return_to_menu" }]
+    },
+    "rewarded": {
+      "preload": true,
+      "placements": [{ "id": "revive" }, { "id": "double_reward" }]
+    }
+  }
+}

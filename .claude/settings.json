@@ -1,0 +1,128 @@
+{
+  "agent": "game-orchestrator",
+  "model": "claude-opus-5-5",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "extraKnownMarketplaces": {
+    "playgama-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "Playgama/playgama-plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "playgama-developer-cabinet@playgama-plugins": true
+  },
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Write",
+      "Edit",
+      "WebSearch",
+      "WebFetch",
+      "Bash(node factory/cli/factory.mjs:*)",
+      "Bash(node:*)",
+      "Bash(corepack pnpm:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git merge:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git branch:*)",
+      "Bash(git ls-files:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(grep:*)",
+      "Bash(wc:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(ffprobe:*)",
+      "mcp__plugin_playgama-developer-cabinet_playgama__list_applications",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_application",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_game_categories",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_submission_state",
+      "mcp__plugin_playgama-developer-cabinet_playgama__list_moderation_comments",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_launch_steps",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_archive_status",
+      "mcp__plugin_playgama-developer-cabinet_playgama__list_in_app_products",
+      "mcp__plugin_playgama-developer-cabinet_playgama__list_leaderboards",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_archive_qa_tool_link",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_local_game_qa_tool_link",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_bridge_sdk_docs",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_game_checklist",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_game_guides",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_game_telemetry_guide",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_game_telemetry_analytics",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_game_telemetry_event_analytics",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_game_telemetry_timeseries",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_game_telemetry_session_facts",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_sandbox_state",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_publications",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_sandbox_share",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_sandbox_traffic",
+      "mcp__plugin_playgama-developer-cabinet_playgama__get_referral_program"
+    ],
+    "ask": [
+      "mcp__plugin_playgama-developer-cabinet_playgama__create_application",
+      "mcp__plugin_playgama-developer-cabinet_playgama__update_application_form",
+      "mcp__plugin_playgama-developer-cabinet_playgama__start_archive_upload",
+      "mcp__plugin_playgama-developer-cabinet_playgama__confirm_archive_upload",
+      "mcp__plugin_playgama-developer-cabinet_playgama__start_cover_upload",
+      "mcp__plugin_playgama-developer-cabinet_playgama__confirm_cover_upload",
+      "mcp__plugin_playgama-developer-cabinet_playgama__replace_in_app_products",
+      "mcp__plugin_playgama-developer-cabinet_playgama__create_leaderboard",
+      "mcp__plugin_playgama-developer-cabinet_playgama__update_leaderboard",
+      "mcp__plugin_playgama-developer-cabinet_playgama__publish_sandbox",
+      "mcp__plugin_playgama-developer-cabinet_playgama__start_sandbox_traffic",
+      "mcp__plugin_playgama-developer-cabinet_playgama__send_playgama_catalog_update",
+      "mcp__plugin_playgama-developer-cabinet_playgama__apply_referral_code",
+      "Bash(curl:*)",
+      "Bash(curl.exe:*)"
+    ],
+    "deny": [
+      "Read(~/.game-factory/**)",
+      "Edit(~/.game-factory/**)",
+      "Read(~/.claude/.credentials.json)",
+      "Bash(claude:*)",
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/factory/hooks/session-start.mjs\"", "timeout": 30 }] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/factory/hooks/user-prompt.mjs\"", "timeout": 15 }] }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell|Agent|Task|mcp__.*",
+        "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/factory/hooks/pre-tool.mjs\"", "timeout": 15 }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "mcp__.*playgama.*",
+        "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/factory/hooks/post-tool.mjs\"", "timeout": 15 }]
+      }
+    ],
+    "SubagentStart": [
+      { "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/factory/hooks/subagent.mjs\"", "timeout": 15 }] }
+    ],
+    "SubagentStop": [
+      { "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/factory/hooks/subagent.mjs\"", "timeout": 15 }] }
+    ]
+  }
+}
